@@ -1,0 +1,9 @@
+
+/.vs/Portfolio/v17
+/AI/.vs
+/Azure/.vs
+/.vs
+
+# Build outputs - ignore all bin and obj directories (any project, any config)
+**/bin/
+**/obj/
