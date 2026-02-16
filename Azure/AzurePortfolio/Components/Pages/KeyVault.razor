@@ -1,0 +1,116 @@
+@page "/keyvault"
+@using AzureKeyVault
+@using Azure.Security.KeyVault.Secrets
+@inject KeyVaultService KeyVaultService
+@inject ILogger<KeyVault> Logger
+@rendermode InteractiveServer
+
+<PageTitle>Azure Key Vault</PageTitle>
+
+<div class="container mt-4">
+    <h1>Azure Key Vault Secrets</h1>
+    
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Retrieve Secret</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="secretName" class="form-label">Secret Name</label>
+                        <input type="text" class="form-control" id="secretName" @bind="secretName" @bind:event="oninput" placeholder="Enter secret name" />
+                    </div>
+                    <button class="btn btn-primary" @onclick="RetrieveSecret" disabled="@(string.IsNullOrWhiteSpace(secretName) || isLoading)">
+                        @if (isLoading)
+                        {
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        }
+                        Retrieve Secret
+                    </button>
+                    
+                    @if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        <div class="alert alert-danger mt-3" role="alert">
+                            @errorMessage
+                        </div>
+                    }
+                    
+                    @if (retrievedSecret != null)
+                    {
+                        <div class="mt-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title">Secret Details</h6>
+                                    <p class="mb-1"><strong>Name:</strong> @retrievedSecret.Name</p>
+                                    <p class="mb-1"><strong>Value:</strong> 
+                                        <span class="text-muted">@(showSecretValue ? retrievedSecret.Value : "••••••••")</span>
+                                        <button class="btn btn-sm btn-outline-secondary ms-2" @onclick="ToggleSecretVisibility">
+                                            @(showSecretValue ? "Hide" : "Show")
+                                        </button>
+                                    </p>
+                                    <p class="mb-1"><strong>Version:</strong> @retrievedSecret.Properties.Version</p>
+                                    <p class="mb-1"><strong>Enabled:</strong> @retrievedSecret.Properties.Enabled</p>
+                                    @if (retrievedSecret.Properties.ExpiresOn.HasValue)
+                                    {
+                                        <p class="mb-1"><strong>Expires On:</strong> @retrievedSecret.Properties.ExpiresOn.Value.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                                    }
+                                    @if (retrievedSecret.Properties.CreatedOn.HasValue)
+                                    {
+                                        <p class="mb-0"><strong>Created On:</strong> @retrievedSecret.Properties.CreatedOn.Value.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5>All Secrets</h5>
+                    <button class="btn btn-sm btn-outline-primary" @onclick="LoadAllSecrets" disabled="@isLoading">
+                        @if (isLoading)
+                        {
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                        }
+                        Refresh
+                    </button>
+                </div>
+                <div class="card-body">
+                    @if (allSecrets == null || allSecrets.Count == 0)
+                    {
+                        <p class="text-muted">No secrets found. Click Refresh to load secrets.</p>
+                    }
+                    else
+                    {
+                        <div class="list-group">
+                            @foreach (SecretProperties secret in allSecrets)
+                            {
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>@secret.Name</strong>
+                                        <br />
+                                        <small class="text-muted">
+                                            Enabled: @secret.Enabled
+                                            @if (secret.UpdatedOn.HasValue)
+                                            {
+                                                <span> | Updated: @secret.UpdatedOn.Value.ToString("yyyy-MM-dd")</span>
+                                            }
+                                        </small>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary" @onclick="() => LoadSecret(secret.Name)">
+                                        View
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
