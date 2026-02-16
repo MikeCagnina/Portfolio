@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Portfolio/v17
+/AI/.vs
+/Azure/.vs
+/Azure/AzureKeyVault/bin/Debug/net8.0
+/Azure/AzureKeyVault/obj
+/Azure/AzurePortfolio/bin/Debug/net8.0
+/Azure/AzurePortfolio/obj
+/Azure/AzureSQLServer/bin/Debug/net8.0
+/Azure/AzureSQLServer/obj
