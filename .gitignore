@@ -19,3 +19,6 @@
 *.user
 /TFSData/lib
 /TFSData/TFSData/lib.zip
+/iOS/Game/.vs
+/iOS/Game/NumberGuessingGame/Assets.xcassets.zip
+/TFSData/.vs/ProjectEvaluation
