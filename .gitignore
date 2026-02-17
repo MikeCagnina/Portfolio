@@ -13,3 +13,9 @@
 /AI/AITraining.Desktop/obj
 /AI/AITraining/bin/Debug/net8.0-windows
 /AI/AITraining/obj
+/TFSData/.vs/TFSData
+/TFSData/TFSData/bin/Debug/net8.0-windows
+/TFSData/TFSData/obj
+*.user
+/TFSData/lib
+/TFSData/TFSData/lib.zip
