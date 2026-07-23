@@ -1,0 +1,25 @@
+<div class="app-container">
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-content">
+        <h1 class="logo">{{ title }}</h1>
+        <ul class="nav-links">
+          <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+          <li><a routerLink="/counter" routerLinkActive="active">Counter</a></li>
+          <li><a routerLink="/weather" routerLinkActive="active">Weather</a></li>
+          <li><a routerLink="/keyvault" routerLinkActive="active">Key Vault</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Azure Portfolio. Built with Angular.</p>
+    </div>
+  </footer>
+</div>
