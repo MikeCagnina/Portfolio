@@ -1,0 +1,33 @@
+<div class="weather-container">
+  <div class="container">
+    <div class="card">
+      <h1>Weather</h1>
+      <p>This component demonstrates showing data.</p>
+
+      <div *ngIf="forecasts === null" class="loading">
+        <p><em>Loading...</em></p>
+      </div>
+
+      <div *ngIf="forecasts !== null">
+        <table class="weather-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Temp. (C)</th>
+              <th>Temp. (F)</th>
+              <th>Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let forecast of forecasts">
+              <td>{{ formatDate(forecast.date) }}</td>
+              <td>{{ forecast.temperatureC }}</td>
+              <td>{{ forecast.temperatureF }}</td>
+              <td>{{ forecast.summary }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

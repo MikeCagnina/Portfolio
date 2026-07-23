@@ -1,0 +1,98 @@
+<div class="keyvault-container">
+  <div class="container">
+    <h1>Azure Key Vault Secrets</h1>
+    
+    <div class="keyvault-grid">
+      <div class="keyvault-column">
+        <div class="card">
+          <div class="card-header">
+            <h5>Retrieve Secret</h5>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="secretName">Secret Name</label>
+              <input 
+                type="text" 
+                id="secretName" 
+                class="form-input" 
+                [(ngModel)]="secretName" 
+                placeholder="Enter secret name"
+                (keyup.enter)="retrieveSecret()"
+              />
+            </div>
+            <button 
+              class="btn btn-primary" 
+              (click)="retrieveSecret()" 
+              [disabled]="!secretName.trim() || isLoading">
+              <span *ngIf="isLoading" class="spinner"></span>
+              Retrieve Secret
+            </button>
+            
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+            
+            <div *ngIf="retrievedSecret" class="secret-details">
+              <div class="card bg-light">
+                <div class="card-body">
+                  <h6>Secret Details</h6>
+                  <p><strong>Name:</strong> {{ retrievedSecret.name }}</p>
+                  <p>
+                    <strong>Value:</strong> 
+                    <span class="text-muted">{{ showSecretValue ? retrievedSecret.value : '••••••••' }}</span>
+                    <button class="btn btn-sm btn-outline-secondary" (click)="toggleSecretVisibility()">
+                      {{ showSecretValue ? 'Hide' : 'Show' }}
+                    </button>
+                  </p>
+                  <p><strong>Version:</strong> {{ retrievedSecret.properties.version }}</p>
+                  <p><strong>Enabled:</strong> {{ retrievedSecret.properties.enabled }}</p>
+                  <p *ngIf="retrievedSecret.properties.expiresOn">
+                    <strong>Expires On:</strong> {{ formatDate(retrievedSecret.properties.expiresOn) }}
+                  </p>
+                  <p *ngIf="retrievedSecret.properties.createdOn">
+                    <strong>Created On:</strong> {{ formatDate(retrievedSecret.properties.createdOn) }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="keyvault-column">
+        <div class="card">
+          <div class="card-header">
+            <h5>All Secrets</h5>
+            <button 
+              class="btn btn-sm btn-outline-primary" 
+              (click)="loadAllSecrets()" 
+              [disabled]="isLoading">
+              <span *ngIf="isLoading" class="spinner"></span>
+              Refresh
+            </button>
+          </div>
+          <div class="card-body">
+            <div *ngIf="!allSecrets || allSecrets.length === 0" class="text-muted">
+              <p>No secrets found. Click Refresh to load secrets.</p>
+            </div>
+            <div *ngIf="allSecrets && allSecrets.length > 0" class="secrets-list">
+              <div *ngFor="let secret of allSecrets" class="secret-item">
+                <div class="secret-info">
+                  <strong>{{ secret.name }}</strong>
+                  <br />
+                  <small class="text-muted">
+                    Enabled: {{ secret.enabled }}
+                    <span *ngIf="secret.updatedOn"> | Updated: {{ formatDate(secret.updatedOn) }}</span>
+                  </small>
+                </div>
+                <button class="btn btn-sm btn-primary" (click)="loadSecret(secret.name)">
+                  View
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.home-container {
+  padding: 40px 0;
+}
+
+.home-content {
+  text-align: center;
+  color: white;
+  padding: 60px 20px;
+}
+
+.home-content h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.home-content p {
+  font-size: 24px;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .home-content h1 {
+    font-size: 36px;
+  }
+
+  .home-content p {
+    font-size: 20px;
+  }
+}

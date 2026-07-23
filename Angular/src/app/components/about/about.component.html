@@ -1,0 +1,40 @@
+<div class="about-container">
+  <div class="container">
+    <div class="card">
+      <h1 class="page-title">About This Project</h1>
+      <div class="content-section">
+        <p class="intro-text">
+          This is a sample Angular project demonstrating modern web development practices
+          and a beautiful, responsive user interface.
+        </p>
+
+        <h2 class="subsection-title">Technologies Used</h2>
+        <ul class="tech-list">
+          <li *ngFor="let tech of technologies" class="tech-item">
+            <span class="tech-badge">{{ tech }}</span>
+          </li>
+        </ul>
+
+        <h2 class="subsection-title">Features</h2>
+        <div class="features-list">
+          <div class="feature-item">
+            <strong>Component-Based Architecture:</strong> Modular and reusable components
+          </div>
+          <div class="feature-item">
+            <strong>Routing:</strong> Single-page application with client-side routing
+          </div>
+          <div class="feature-item">
+            <strong>Modern UI:</strong> Clean, responsive design with smooth animations
+          </div>
+          <div class="feature-item">
+            <strong>TypeScript:</strong> Type-safe development for better code quality
+          </div>
+        </div>
+
+        <div class="cta-section">
+          <button class="btn btn-primary" routerLink="/contact">Get in Touch</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

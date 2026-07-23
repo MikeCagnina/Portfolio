@@ -1,0 +1,67 @@
+.error-container {
+  padding: 40px 0;
+}
+
+.error-container .card {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.text-danger {
+  color: #dc3545;
+}
+
+.error-container h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.error-container h2 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 32px;
+}
+
+.request-id {
+  margin: 24px 0;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #dc3545;
+}
+
+.request-id code {
+  background: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.dev-info {
+  margin-top: 32px;
+}
+
+.dev-info h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.dev-info p {
+  line-height: 1.8;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .error-container h1 {
+    font-size: 36px;
+  }
+
+  .error-container h2 {
+    font-size: 24px;
+  }
+}
